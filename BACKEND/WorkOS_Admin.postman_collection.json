@@ -1,0 +1,67 @@
+{
+    "info": {
+        "_postman_id": "YOUR_UNIQUE_COLLECTION_ID", // Postman will generate this
+        "name": "WorkOS - Admin API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin Auth",
+            "item": [
+                {
+                    "name": "Admin Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "// Automatically save the token to the environment variable",
+                                    "if (pm.response.code === 200) {",
+                                    "    pm.environment.set(\"adminToken\", pm.response.json().token);",
+                                    "    console.log(\"Admin Token saved.\");",
+                                    "} else {",
+                                    "    console.error(\"Login failed, token not saved.\");",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"shubham321098@gmail.com\",\n    \"password\": \"321987654@Ewq\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/admin/auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description": "Logs in the internal admin user and saves the JWT token."
+                    },
+                    "response": []
+                }
+                // Add more admin routes here later (e.g., a check-auth route)
+            ]
+        }
+    ]
+}
